@@ -44,7 +44,7 @@ void nhapSach(string& maSach, string& ngayNhap, double& donGia, int& soLuong, st
 	cin.ignore();
 	cout << "Nhap ma sach: ";
 	getline(cin, maSach);
-	cout << "Nhap ngay nhap: ";//2/0/2005
+	cout << "Nhap ngay nhap: ";
 	do
 	{
 		getline(cin, ngayNhap);

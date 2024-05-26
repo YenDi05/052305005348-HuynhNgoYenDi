@@ -262,7 +262,7 @@ void nhapThemNhanVien(vector<Employee*>& danhSachNhanVien) {
 			luaChon = 1;
 		}
 		}
-		if (chon == 1)
+		if (chon == 1 || chon == 2)
 		{
 			cout << "-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-" << endl;
 			cout << "1. Tiep tuc them nhan vien" << endl;
@@ -422,6 +422,9 @@ void demNhanVienVaoLamTrongNam(const vector<Employee*>& danhSachNhanVien) {
 void capNhatGioLamChoNhanVien(vector<Employee*>& danhSachNhanVien) {
 	cout << "Danh sach nhan vien parttime truoc khi cap nhat!" << endl;
 	cout << endl;
+	khung();
+	cout << setw(17) << left << "So gio lam/tuan" << setw(17) << left << "Luong mot gio" << setw(15) << left << "Luong" << endl;
+	cout << setfill('-') << setw(107) << "-" << endl;
 	for (int i = 0; i < danhSachNhanVien.size(); i++) {
 		if (PartTimeEmployee* partTime = dynamic_cast<PartTimeEmployee*>(danhSachNhanVien[i])) {
 			danhSachNhanVien[i]->inDanhSach();
@@ -449,6 +452,9 @@ void capNhatGioLamChoNhanVien(vector<Employee*>& danhSachNhanVien) {
 					int soGioLam;
 					cin >> soGioLam;
 					partTime->setSoGioLamTrongTuan(soGioLam);
+					khung();
+					cout << setw(17) << left << "So gio lam/tuan" << setw(17) << left << "Luong mot gio" << setw(15) << left << "Luong" << endl;
+					cout << setfill('-') << setw(107) << "-" << endl;
 					danhSachNhanVien[i]->inDanhSach();
 					count++;
 					found = true;
@@ -468,9 +474,7 @@ void sapXepNgayVao(vector<Employee*>& danhSachNhanVien) {
 	cout << endl;
 	cout << "Xuat danh sach nhan vien truoc khi sap xep: \n";
 	cout << endl;
-	for (int i = 0; i < danhSachNhanVien.size(); i++) {
-		danhSachNhanVien[i]->inDanhSach();
-	}
+	xuatDanhSachNhanVien(danhSachNhanVien);
 
 	sort(danhSachNhanVien.begin(), danhSachNhanVien.end(), soSanhNgayVao);
 	cout << endl;
