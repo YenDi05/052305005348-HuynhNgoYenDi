@@ -14,8 +14,8 @@ void khung() {
 void nhapCung(vector<Showroom*>& danhSachXe) {
 	danhSachXe.push_back(new OtoKhach("K001", 2003, 300, 30000000000, "xe khac", 20));
 	danhSachXe.push_back(new OtoKhach("K002", 2008, 300, 800000000, "xe du lich", 17));
-	danhSachXe.push_back(new OtoKhach("K003", 2004, 800, 450000000, "xe ban tai", 2));
-	danhSachXe.push_back(new OtoTai("T004", 2007, 300, 300000000, 1000));
+	danhSachXe.push_back(new OtoKhach("K003", 2004, 800, 45000000, "xe ban tai", 2));
+	danhSachXe.push_back(new OtoTai("T004", 2007, 300, 35000000000, 1000));
 	danhSachXe.push_back(new OtoTai("T005", 2005, 400, 350000000, 850));
 	cout << endl;
 }
@@ -185,7 +185,7 @@ void demSoLuongXe(const vector<Showroom*>& danhSachXe) {
 	cout << setfill('-') << setw(107) << "-" << endl;
 	for (int i = 0; i < danhSachXe.size(); i++) {
 		if (OtoTai* ototai = dynamic_cast<OtoTai*>(danhSachXe[i])) {
-			if (ototai->thueTruocBa() > 2000000) {
+			if (ototai->thueTruocBa() > 200000000) {
 				danhSachXe[i]->toString();
 				count++;
 			}
