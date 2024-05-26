@@ -14,8 +14,8 @@ void khung() {
 void nhapCung(vector<Showroom*>& danhSachXe) {
 	danhSachXe.push_back(new OtoKhach("K001", 2003, 300, 30000000000, "xe khac", 20));
 	danhSachXe.push_back(new OtoKhach("K002", 2008, 300, 800000000, "xe du lich", 17));
-	danhSachXe.push_back(new OtoKhach("K003", 2004, 800, 45000000, "xe ban tai", 2));
-	danhSachXe.push_back(new OtoTai("T004", 2007, 300, 35000000000, 1000));
+	danhSachXe.push_back(new OtoKhach("K003", 2004, 800, 450000000, "xe ban tai", 2));
+	danhSachXe.push_back(new OtoTai("T004", 2007, 300, 300000000, 1000));
 	danhSachXe.push_back(new OtoTai("T005", 2005, 400, 350000000, 850));
 	cout << endl;
 }
@@ -44,6 +44,15 @@ void xuatDanhSachXe(vector<Showroom*> danhSachXe) {
 	}
 }
 
+bool kiemTraMaTrung(const vector<Showroom*>& danhSachXe, const string& ma) {
+	for (const auto& xe : danhSachXe) {
+		if (xe->getMa() == ma) {
+			return true;
+		}
+	}
+	return false;
+}
+
 vector<Showroom*> danhSachXe;
 void themXe(string& ma, int& namSX, double& dungTichDongCo, int& triGiaXe) {
 	cin.ignore();
@@ -57,12 +66,17 @@ void themXe(string& ma, int& namSX, double& dungTichDongCo, int& triGiaXe) {
 	cin >> triGiaXe;
 
 }
-OtoKhach nhapotokhach() {
+OtoKhach nhapotokhach(vector<Showroom*>& danhSachXe) {
 	OtoKhach otokhach;
 	string ma, loaiXe;
 	double dungTichDongCo;
 	int triGiaXe, namSX, soCho;
-	themXe(ma, namSX, dungTichDongCo, triGiaXe);
+	do {
+		themXe(ma, namSX, dungTichDongCo, triGiaXe);
+		if (kiemTraMaTrung(danhSachXe, ma)) {
+			cout << "Ma xe da ton tai. Vui long nhap ma khac." << endl;
+		}
+	} while (kiemTraMaTrung(danhSachXe, ma));
 	cin.ignore();
 	cout << "Loai xe:";
 	getline(cin, loaiXe);
@@ -76,12 +90,17 @@ OtoKhach nhapotokhach() {
 	otokhach.setSoCho(soCho);
 	return otokhach;
 }
-OtoTai nhapototai() {
+OtoTai nhapototai(vector<Showroom*>& danhSachXe) {
 	string ma;
 	double dungTichDongCo;
 	int triGiaXe, namSX;
 	float taiTrong;
-	themXe(ma, namSX, dungTichDongCo, triGiaXe);
+	do {
+		themXe(ma, namSX, dungTichDongCo, triGiaXe);
+		if (kiemTraMaTrung(danhSachXe, ma)) {
+			cout << "Ma xe da ton tai. Vui long nhap ma khac." << endl;
+		}
+	} while (kiemTraMaTrung(danhSachXe, ma));
 	cout << "Tai trong: ";
 	cin >> taiTrong;
 	return OtoTai(ma, namSX, dungTichDongCo, triGiaXe, taiTrong);
@@ -112,7 +131,7 @@ void nhapThemXe(vector<Showroom*>& danhSachXe) {
 					cout << "-------------------" << endl;
 					do
 					{
-						danhSachXe.push_back(new OtoKhach(nhapotokhach()));
+						danhSachXe.push_back(new OtoKhach(nhapotokhach(danhSachXe)));
 						cout << endl;
 						cout << "1. Tiep tuc them oto khach  --- 0. Thoat" << endl;
 						cout << "Nhap:";
@@ -127,7 +146,7 @@ void nhapThemXe(vector<Showroom*>& danhSachXe) {
 					cout << "-------------------" << endl;
 					do
 					{
-						danhSachXe.push_back(new OtoTai(nhapototai()));
+						danhSachXe.push_back(new OtoTai(nhapototai(danhSachXe)));
 						cout << endl;
 						cout << "1. Tiep tuc them oto tai  --- 0. Thoat" << endl;
 						cout << "Nhap:";
@@ -171,7 +190,7 @@ void demSoLuongXe(const vector<Showroom*>& danhSachXe) {
 	cout << setfill('-') << setw(107) << "-" << endl;
 	for (int i = 0; i < danhSachXe.size(); i++) {
 		if (OtoKhach* otokhach = dynamic_cast<OtoKhach*>(danhSachXe[i])) {
-			if (otokhach->thueTruocBa() > 200000000) {
+			if (otokhach->thueTruocBa() > 2000000) {
 				danhSachXe[i]->toString();
 				count++;
 			}
